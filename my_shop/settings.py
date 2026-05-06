@@ -98,3 +98,9 @@ USE_TZ = False
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
+
+if not os.environ.get('RENDER'):
+    pass
+else:
+    os.system('python manage.py migrate --noinput')
