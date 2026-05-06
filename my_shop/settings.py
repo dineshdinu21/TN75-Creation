@@ -9,7 +9,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-os.system('python manage.py migrate')
 
 INSTALLED_APPS = [
     'django.contrib.admin',
