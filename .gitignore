@@ -1,0 +1,10 @@
+# Python environment
+venv/
+__pycache__/
+*.pyc
+
+# Database 
+db.sqlite3
+
+# OS related
+.DS_Store

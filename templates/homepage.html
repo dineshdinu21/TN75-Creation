@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Dashboard</h2>
+{% comment %} 
+<div class="sales-card">
+    <h3 style="margin:0; color:#666;">Total Sales</h3>
+    <h2 style="margin:5px 0 0 0; color:#0072ff;">₹ {{ total_sales }}</h2>
+</div>
+
+<br><br> {% endcomment %}
+
+<h3>Recent Sales</h3>
+
+<table style="border: 5px solid black; border-radius: 5px;">
+    <thead>
+        <tr>
+            <th>Date and Time</th>
+            <th>Customer Name</th>
+            <th>Product Name</th>
+            <th>Qty</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for sale in sales %}
+        <tr>
+            <td>{{ sale.date|date:"d-m-Y | h:i A" }}</td>
+            <td>{{ sale.customer_name }}</td>
+            <td>{{ sale.product.name }}</td>
+            <td>{{ sale.quantity }}</td>
+            <td style="font-weight: bold; color: #28a745;">₹ {{ sale.total }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
