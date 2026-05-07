@@ -5,10 +5,10 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse
 
 def create_admin_once(request):
-    if not User.objects.filter(username='admin').exists():
+    if not User.objects.filter(username='Dinu').exists():
         User.objects.create_superuser('Dinu', 'admin@test.com', 'Dinu1234')
         return HttpResponse("Admin created successfully!")
-    return HttpResponse("Admin already exists.")
+    return HttpResponse("This Admin already exists.")
 
 def homepage(request):
     products = Product.objects.all()
