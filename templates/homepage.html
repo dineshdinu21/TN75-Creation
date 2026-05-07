@@ -2,35 +2,101 @@
 
 {% block content %}
 
-<h2>Dashboard</h2>
-{% comment %} 
-<div class="sales-card">
-    <h3 style="margin:0; color:#666;">Total Sales</h3>
-    <h2 style="margin:5px 0 0 0; color:#0072ff;">₹ {{ total_sales }}</h2>
-</div>
+<style>
+    /* Table Design */
+    .sales-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        background-color: white;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        border-radius: 8px;
+        overflow: hidden;
+    }
 
-<br><br> {% endcomment %}
+    .sales-table th, .sales-table td {
+        padding: 12px 15px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .sales-table th {
+        background-color: #007bff;
+        color: white;
+        text-transform: uppercase;
+        font-size: 14px;
+    }
+
+    .sales-table tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    /* Status Badges */
+    .badge {
+        padding: 5px 10px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    .badge-paid {
+        background-color: #d4edda;
+        color: #155724;
+    }
+
+    .badge-unpaid {
+        background-color: #f8d7da;
+        color: #721c24;
+    }
+
+    .price-tag {
+        color: #666;
+        font-size: 13px;
+    }
+
+    .total-amount {
+        font-weight: bold;
+        color: #28a745;
+    }
+</style>
+
+<h2>Dashboard</h2>
 
 <h3>Recent Sales</h3>
 
-<table style="border: 5px solid black; border-radius: 5px;">
+<table class="sales-table">
     <thead>
         <tr>
-            <th>Date and Time</th>
-            <th>Customer Name</th>
-            <th>Product Name</th>
+            <th>Date & Time</th>
+            <th>Customer</th>
+            <th>Product</th>
+            <th>Price</th>
             <th>Qty</th>
             <th>Total</th>
+            <th>Status</th>
         </tr>
     </thead>
     <tbody>
         {% for sale in sales %}
         <tr>
-            <td>{{ sale.date|date:"d-m-Y | h:i A" }}</td>
-            <td>{{ sale.customer_name }}</td>
+            <td style="font-size: 13px;">{{ sale.date|date:"d-m-Y | h:i A" }}</td>
+            <td style="font-weight: 500;">{{ sale.customer_name }}</td>
             <td>{{ sale.product.name }}</td>
+            <td class="price-tag">₹ {{ sale.price }}</td>
             <td>{{ sale.quantity }}</td>
-            <td style="font-weight: bold; color: #28a745;">₹ {{ sale.total }}</td>
+            <td class="total-amount">₹ {{ sale.total }}</td>
+            <td>
+                {% if sale.status %}
+                    <span class="badge badge-paid">Paid</span>
+                {% else %}
+                    <span class="badge badge-unpaid">Unpaid</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="7" style="text-align: center;">No sales recorded yet.</td>
         </tr>
         {% endfor %}
     </tbody>

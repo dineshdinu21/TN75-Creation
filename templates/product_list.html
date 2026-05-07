@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<style>
+    .product-table {
+        width: 100%;
+        border-collapse: collapse;
+        background: white;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .product-table th, .product-table td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid #eee;
+    }
+    .product-table th {
+        background-color: #343a40;
+        color: white;
+    }
+    .low-stock {
+        color: #d9534f;
+        font-weight: bold;
+        background-color: #f9f2f2;
+    }
+    .instock-badge {
+        padding: 4px 8px;
+        background: #e1f5fe;
+        color: #0288d1;
+        border-radius: 4px;
+        font-size: 12px;
+    }
+</style>
+
+<div style="display: flex; justify-content: space-between; align-items: center;">
+    <h2>Inventory / Product List</h2>
+    <a href="{% url 'products' %}" style="text-decoration: none; background: #28a745; color: white; padding: 10px 15px; border-radius: 5px;">+ Add New Product</a>
+</div>
+
+<table class="product-table">
+    <thead>
+        <tr>
+            <th>Product Name</th>
+            <th>Base Price</th>
+            <th>Available Stock</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for product in products %}
+        <tr {% if product.stock < 10 %} class="low-stock" {% endif %}>
+            <td>{{ product.name }}</td>
+            <td>₹ {{ product.price }}</td>
+            <td>{{ product.stock }}</td>
+            <td>
+                {% if product.stock > 0 %}
+                    <span class="instock-badge">Available</span>
+                {% else %}
+                    <span style="color: red; font-weight: bold;">Out of Stock</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

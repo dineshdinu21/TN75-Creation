@@ -33,17 +33,25 @@ def add_sale(request):
         product_id = request.POST.get('product')
         quantity = int(request.POST.get('quantity'))
         customer_name = request.POST.get('customer_name')
+        customer_price= request.POST.get('price')
+        status = request.POST.get('status') == 'True'
         product = get_object_or_404(Product, id=product_id)
 
         if product.stock >= quantity:
+            if customer_price:
+                final_price = int(customer_price)
+            else:
+                final_price = product.price
 
-            total_price = product.price * quantity
+            total_price = final_price * quantity
             
             Sale.objects.create(
                 customer_name=customer_name,
                 product=product,
+                price=final_price,
                 quantity=quantity,
-                total=total_price
+                total=total_price,
+                status=status
             )
 
             product.stock -= quantity
@@ -57,3 +65,9 @@ def add_sale(request):
             })
 
     return render(request, 'sales.html', {'products': products})
+
+
+def product_list(request):
+    products = Product.objects.all()
+    return render(request, 'product_list.html', {'products': products})
+
