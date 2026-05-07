@@ -1,6 +1,14 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Product, Sale
 from django.db.models import Sum
+from django.contrib.auth.models import User
+from django.http import HttpResponse
+
+def create_admin_once(request):
+    if not User.objects.filter(username='admin').exists():
+        User.objects.create_superuser('Dinu', 'admin@test.com', 'Dinu1234')
+        return HttpResponse("Admin created successfully!")
+    return HttpResponse("Admin already exists.")
 
 def homepage(request):
     products = Product.objects.all()
