@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Product, Sale
-from django.db.models import Sum
 from django.contrib.auth.models import User
 from django.http import HttpResponse
+
 
 def create_admin_once(request):
     if not User.objects.filter(username='Dinu').exists():
@@ -79,3 +79,11 @@ def product_list(request):
     products = Product.objects.all()
     return render(request, 'product_list.html', {'products': products})
 
+def edit_status(request, sale_id):
+    sale = get_object_or_404(Sale, id=sale_id)
+    if sale.status == True:
+        sale.status = False
+    else:
+        sale.status = True
+    sale.save()
+    return redirect('home')

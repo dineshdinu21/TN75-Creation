@@ -75,6 +75,7 @@
             <th>Qty</th>
             <th>Total</th>
             <th>Status</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -92,6 +93,9 @@
                 {% else %}
                     <span class="badge badge-unpaid">Unpaid</span>
                 {% endif %}
+            </td>
+            <td style="text-align: center;">
+                <a href="{% url 'edit_status' sale.id %}" style="text-decoration: none;">🖋️</a>
             </td>
         </tr>
         {% empty %}
