@@ -6,5 +6,5 @@ urlpatterns = [
     path('products/', views.add_product, name='products'),
     path('sales/', views.add_sale, name='sales'),
     path('products/list/', views.product_list, name='product_list'),
-    path('admin/login/', views.create_admin_once, name='create_admin'),
+    path('tn75/admin-login/', views.create_admin_once, name='create_admin'),
 ]
