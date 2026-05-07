@@ -56,7 +56,7 @@ WSGI_APPLICATION = 'my_shop.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default='sqlite:///db.sqlite3', # Laptop-la irukkumbothu sqlite use pannum
+        default='postgresql://shop_db_ckur_user:Fcj9ch6sVQSgzs9VbWMCXLJXhvV6TKLf@dpg-d7tl0de7r5hc73dfpuv0-a.oregon-postgres.render.com/shop_db_ckur', 
         conn_max_age=600
     )
 }
