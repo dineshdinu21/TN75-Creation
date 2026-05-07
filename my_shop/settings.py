@@ -56,10 +56,10 @@ WSGI_APPLICATION = 'my_shop.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default='postgresql://shop_db_ckur_user:Fcj9ch6sVQSgzs9VbWMCXLJXhvV6TKLf@dpg-d7tl0de7r5hc73dfpuv0-a.oregon-postgres.render.com/shop_db_ckur', 
-        conn_max_age=600
+        default=os.environ.get('DATABASE_URL')
     )
 }
+
 
 
 # Password validation
