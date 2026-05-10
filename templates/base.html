@@ -13,13 +13,24 @@
     }
 
     .navbar {
-        background: #0072ff;
+        {% comment %} background: #0072ff; {% endcomment %}
+        background: #771818f7;
         color: white;
-        padding: 15px 50px;
+        padding: 5px 50px;
         display: flex;
         justify-content: space-between;
         align-items: center;
         box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .navbar .h2 {
+        flex: 1; 
+        text-align: center;
+        margin-left: 15%;
+    }
+
+    .navbar img, .navbar div {
+        flex-shrink: 0;
     }
 
     .container {
@@ -63,7 +74,7 @@
     .sales-card {
         background: white;
         padding: 20px;
-        border-left: 5px solid #0072ff;
+        border-left: 5px solid #771818f7;
         display: inline-block;
         border-radius: 5px;
         box-shadow: 0 2px 5px rgba(0,0,0,0.05);
@@ -75,17 +86,23 @@
 <body>
 
 <div class="navbar">
-    <h2>TN75 CREATION</h2>
-    {% comment %} <img src="{% static 'images/logo.jpeg' %}" alt="TN75 Logo" style="height: 40px;"> {% endcomment %}
+
+    <img src="{% static 'images/Logo.png' %}" alt="TN75 Logo" style="height: 84px; width: auto;">
+
+    <div class="h2">
+        <h2 style="color: white;"><b>TN75 CREATION</b></h2>
+        <marquee style="color: yellow; font-size: 14px; margin-top: -10px;">
+            <b>Welcome &nbsp; to &nbsp; TN75 Creation &nbsp;&nbsp;-&nbsp;&nbsp; Print&nbsp;&nbsp;Means&nbsp;&nbsp;Quality!&nbsp;&nbsp;&nbsp;&nbsp; Quality Means Us!</b>
+        </marquee>
+
+    </div>
+
 
     <div>
-        <a href="{% url 'home' %}" style="color:white">Home</a>
-        |
-        <a href="{% url 'product_list' %}" style="color:white">Product List</a>
-        |
-        <a href="{% url 'products' %}" style="color:white">Add Product</a>
-        |
-        <a href="{% url 'sales' %}" style="color:white">Add Sale</a>
+        <a href="{% url 'home' %}" style="color:white; text-decoration:none;">Home</a> |
+        <a href="{% url 'product_list' %}" style="color:white; text-decoration:none;">Product List</a> |
+        <a href="{% url 'products' %}" style="color:white; text-decoration:none;">Add Product</a> |
+        <a href="{% url 'sales' %}" style="color:white; text-decoration:none;">Add Sale</a>
     </div>
 </div>
 
