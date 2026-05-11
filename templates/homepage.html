@@ -3,7 +3,7 @@
 {% block content %}
 
 <style>
-    /* Table Design */
+
     .sales-table {
         width: 100%;
         border-collapse: collapse;
@@ -31,7 +31,6 @@
         background-color: #f1f1f1;
     }
 
-    /* Status Badges */
     .badge {
         padding: 5px 10px;
         border-radius: 20px;
@@ -59,9 +58,34 @@
         font-weight: bold;
         color: #28a745;
     }
+
+    .report-btn {
+        background-color: #771818f7; /* Unga table header color */
+        color: white;
+        padding: 10px 20px;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: bold;
+        font-size: 14px;
+        transition: 0.3s;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .report-btn:hover {
+        background-color: #5a1212;
+        color: white;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
+
 </style>
 
-<h2>Dashboard</h2>
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+    <h2 style="margin: 0;">Dashboard</h2>
+    <a href="{% url 'daily_report'%}" class="report-btn">
+        📊 Daily Reports
+    </a>
+</div>
+
 
 <h3>Recent Sales</h3>
 

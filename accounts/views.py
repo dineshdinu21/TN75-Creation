@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Product, Sale
 from django.contrib.auth.models import User
 from django.http import HttpResponse
+from django.db.models import Sum,Q
 
 
 def create_admin_once(request):
@@ -87,3 +88,12 @@ def edit_status(request, sale_id):
         sale.status = True
     sale.save()
     return redirect('home')
+
+def daily_sales_report(request):
+    summary_list = Sale.objects.values('date__date').annotate(
+        total_revenue=Sum('total'),
+        total_qty=Sum('quantity'),
+        unpaid_total=Sum('total', filter=Q(status=False))
+    ).order_by('-date__date')
+
+    return render(request, 'daily_report.html', {'summary_list': summary_list})
