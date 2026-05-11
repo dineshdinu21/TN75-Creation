@@ -58,6 +58,7 @@
                     <th>DATE</th>
                     <th>TOTAL QUANTITY</th>
                     <th>TOTAL SALES AMOUNT</th>
+                    <th>UNPAID QUANTITY</th>
                     <th>UNPAID AMOUNT</th>
                 </tr>
             </thead>
@@ -67,6 +68,7 @@
                     <td>{{ day.date__date|date:"d-m-Y" }}</td>
                     <td>{{ day.total_qty }}</td>
                     <td class="total-text">₹ {{ day.total_revenue }}</td>
+                    <td class="unpaid-text">{{ day.unpaid_qty|default:0 }}</td>
                     <td class="unpaid-text">₹ {{ day.unpaid_total|default:0 }}</td>
                 </tr>
                 {% empty %}

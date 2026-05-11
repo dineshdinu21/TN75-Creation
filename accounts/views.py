@@ -93,6 +93,7 @@ def daily_sales_report(request):
     summary_list = Sale.objects.values('date__date').annotate(
         total_revenue=Sum('total'),
         total_qty=Sum('quantity'),
+        unpaid_qty=Sum('quantity',filter=Q(status=False)),
         unpaid_total=Sum('total', filter=Q(status=False))
     ).order_by('-date__date')
 
