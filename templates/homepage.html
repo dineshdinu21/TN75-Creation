@@ -112,15 +112,17 @@
             <td>{{ sale.quantity }}</td>
             <td class="total-amount">₹ {{ sale.total }}</td>
             <td>
-                {% if sale.status %}
-                    <span class="badge badge-paid">Paid</span>
-                {% else %}
-                    <span class="badge badge-unpaid">Unpaid</span>
-                {% endif %}
+                <a href="{% url 'edit_status' sale.id %}" style="text-decoration: none;">
+                    {% if sale.status %}
+                        <span class="badge badge-paid">Paid</span>
+                    {% else %}
+                        <span class="badge badge-unpaid">Unpaid</span>
+                    {% endif %}
+                </a>
             </td>
-            <td style="text-align: center;">
+            {% comment %} <td style="text-align: center;">
                 <a href="{% url 'edit_status' sale.id %}" style="text-decoration: none;">🖋️</a>
-            </td>
+            </td> {% endcomment %}
         </tr>
         {% empty %}
         <tr>
