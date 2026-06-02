@@ -32,12 +32,12 @@
         font-size: 12px;
     }
 </style>
-
+<div class="container body">
 <div style="display: flex; justify-content: space-between; align-items: center;">
     <h2>Inventory / Product List</h2>
     <a href="{% url 'products' %}" style="text-decoration: none; background: #802020; color: white; padding: 10px 15px; border-radius: 5px;">+ Add New Product</a>
 </div>
-
+<br>
 <table class="product-table">
     <thead>
         <tr>
@@ -64,5 +64,5 @@
         {% endfor %}
     </tbody>
 </table>
-
+</div>
 {% endblock %}

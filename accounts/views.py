@@ -41,7 +41,7 @@ def dashboard(request):
         'products': products,
         'sales': sales,
     }
-    return render(request, 'homepage.html', context)
+    return render(request, 'dashboard.html', context)
 
 def add_product(request):
     if request.method == 'POST':

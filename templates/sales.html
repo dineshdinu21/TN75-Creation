@@ -2,63 +2,122 @@
 {% load static %}
 {% block content %}
 <style>
+    /* Full page wrap panni center konduvara */
+    .center-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 80vh; /* Screen center panna */
+        padding: 20px;
+    }
+    /* Card box design */
+    .sale-container { 
+        background: #ffffff;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 500px; /* Card size limit */
+    }
+    .sale-container h2 {
+        text-align: center;
+        margin-bottom: 30px;
+        color: #333;
+        font-family: sans-serif;
+    }
+    .form-group { 
+        margin-bottom: 20px; 
+        display: flex;
+        flex-direction: column; /* Inputs vertical-ah vara */
+    }
+    label { 
+        font-weight: 600;
+        margin-bottom: 8px;
+        color: #555;
+    }
+    input[type="text"],
+    input[type="number"],
+    select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        box-sizing: border-box;
+        font-size: 14px;
+    }
+    input:focus, select:focus {
+        border-color: #771818f7;
+        outline: none;
+        box-shadow: 0 0 5px rgba(119, 24, 24, 0.2);
+    }
     .status-paid { 
         color: #28a745; font-weight: bold; 
     } 
     .status-unpaid { 
         color: #dc3545; font-weight: bold; 
     } 
-    .form-group { 
-        margin-bottom: 15px; 
+    .submit-btn {
+        width: 100%;
+        padding: 12px;
+        background-color: #771818f7;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background 0.3s;
     }
-    label { 
-        display: inline-block; width: 120px; 
+    .submit-btn:hover {
+        background-color: #5a1212f7;
     }
 </style>
 
-<h2>Add Sale</h2>
+<div class="center-wrapper">
+    <div class="sale-container">
+        <h2>Add Sale</h2>
 
-<form method="POST">
-    {% csrf_token %}
+        <form method="POST">
+            {% csrf_token %}
 
-    <div class="form-group">
-        <label>Customer Name</label>
-        <input type="text" name="customer_name" required>
+            <div class="form-group">
+                <label>Customer Name</label>
+                <input type="text" name="customer_name" required>
+            </div>
+
+            <div class="form-group">
+                <label>Select Product</label>
+                <select name="product">
+                    {% for product in products %}
+                    <option value="{{ product.id }}">
+                        {{ product.name }} (Rate: {{ product.price }})
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Quantity</label>
+                <input type="number" name="quantity" required>
+            </div>
+
+            <div class="form-group">
+                <label>Custom Price</label>
+                <input type="number" name="price">
+            </div>
+
+            <div class="form-group">
+                <label>Status</label>
+                <select name="status">
+                    <option value="True" class="status-paid">Paid</option>
+                    <option value="False" class="status-unpaid">Unpaid</option>
+                </select>
+            </div>
+
+            <button type="submit" class="submit-btn">
+                Save Sale
+            </button>
+        </form>
     </div>
-
-    <div class="form-group">
-        <label>Select Product</label>
-        <select name="product">
-            {% for product in products %}
-            <option value="{{ product.id }}">
-                {{ product.name }} (Rate: {{ product.price }})
-            </option>
-            {% endfor %}
-        </select>
-    </div>
-
-    <div class="form-group">
-        <label>Quantity</label>
-        <input type="number" name="quantity" required>
-    </div>
-
-    <div class="form-group">
-        <label>Custom Price</label>
-        <input type="number" name="price">
-    </div>
-
-    <div class="form-group">
-        <label>Status</label>
-        <select name="status">
-            <option value="True" class="status-paid">Paid</option>
-            <option value="False" class="status-unpaid">Unpaid</option>
-        </select>
-    </div>
-
-    <br>
-    <button type="submit" style="padding: 10px 20px; background-color: #771818f7; color: white; border: none; border-radius: 4px;">
-        Save Sale
-    </button>
-</form>
-
+</div>
 {% endblock %}
