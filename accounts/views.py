@@ -34,6 +34,15 @@ def homepage(request):
     }
     return render(request, 'homepage1.html', context)
 
+def dashboard(request):
+    products = Product.objects.all()
+    sales = Sale.objects.all().order_by('-date')
+    context = {
+        'products': products,
+        'sales': sales,
+    }
+    return render(request, 'homepage.html', context)
+
 def add_product(request):
     if request.method == 'POST':
         name = request.POST.get('name')
