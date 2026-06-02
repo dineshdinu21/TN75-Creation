@@ -121,3 +121,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 CSRF_TRUSTED_ORIGINS = ['https://tn75creation.onrender.com']
+
+# AUTH_USER_MODEL = 'accounts.CustomUser' 
+# LOGIN_REDIRECT_URL = '/'
+# LOGOUT_REDIRECT_URL = '/login/'

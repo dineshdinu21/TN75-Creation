@@ -1,5 +1,9 @@
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import AbstractUser
+
+# class CustomUser(AbstractUser):
+#     is_approved = models.BooleanField(default=False)
 
 class Product(models.Model):
     name = models.CharField(max_length=100)

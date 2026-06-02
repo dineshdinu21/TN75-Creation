@@ -3,13 +3,27 @@ from .models import Product, Sale
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.db.models import Sum,Q
-
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import views as auth_views
+# from .forms import RegisterForm
 
 def create_admin_once(request):
     if not User.objects.filter(username='Dinu').exists():
         User.objects.create_superuser('Dinu', 'admin@test.com', 'Dinu1234')
         return HttpResponse("Admin created successfully!")
     return HttpResponse("This Admin already exists.")
+
+# def register(request):
+#     form = RegisterForm()
+#     if request.method == 'POST':
+#         form = RegisterForm(request.POST)
+#         if form.is_valid():
+#             user = form.save(commit=False)
+#             user.is_approved = False
+#             user.save()
+#             return redirect('login')
+#     return render(request,'register.html',{'form': form})
 
 def homepage(request):
     products = Product.objects.all()
@@ -18,7 +32,7 @@ def homepage(request):
         'products': products,
         'sales': sales,
     }
-    return render(request, 'homepage.html', context)
+    return render(request, 'homepage1.html', context)
 
 def add_product(request):
     if request.method == 'POST':
@@ -35,7 +49,10 @@ def add_product(request):
 
     return render(request, 'products.html')
 
+# @login_required
 def add_sale(request):
+    # if not request.user.is_approved:
+    #     return HttpResponse("You are not approved to add sales.")
     products = Product.objects.all()
 
     if request.method == 'POST':
